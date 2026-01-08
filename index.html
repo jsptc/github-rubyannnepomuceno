@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jade Networks — Types of Networks (PAN, LAN, MAN, WAN)</title>
+  <meta name="description" content="Overview of network types (PAN, LAN, MAN, WAN) with descriptions and purposes. Jade-themed, responsive, and accessible."/>
+  <style>
+    :root{
+      --jade: #00A86B;
+      --jade-600: #008a56;
+      --jade-400: #27b07c;
+      --bg: #071428;
+      --card-bg: linear-gradient(180deg,#04202b,#062b2a);
+      --muted: #d7f3ea;
+      --accent: #13f3d1;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 12px;
+      --max-width: 1200px;
+      --shadow: 0 14px 40px rgba(2,6,8,0.6);
+    }
+
+    /* Reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--muted);
+      background: radial-gradient(1200px 400px at 5% 10%, rgba(0,168,107,0.06), transparent),
+                  linear-gradient(180deg, #041426 0%, var(--bg) 100%);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+    }
+
+    /* Layout container */
+    .container{
+      width: min(94%, var(--max-width));
+      margin: 0 auto;
+      padding: 12px 0;
+    }
+
+    /* Header */
+    .site-header{
+      padding: 34px 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .header-inner{display:flex;flex-direction:column;gap:6px}
+    .site-title{
+      margin:0;
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      color:var(--jade);
+      letter-spacing:0.6px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .site-title::before{
+      content:"";
+      width:14px;height:14px;border-radius:4px;
+      background: linear-gradient(135deg,var(--jade),var(--jade-400));
+      box-shadow: 0 6px 20px rgba(0,168,107,0.18);
+    }
+    .site-tagline{margin:0;color:rgba(215,243,234,0.95)}
+
+    /* Hero */
+    .hero{padding:20px 0 8px}
+    .hero-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
+    .hero-left h2{margin:0;color:var(--jade-400)}
+    .lead{color:rgba(215,243,234,0.95);margin:.4rem 0 0}
+    .note{margin:.6rem 0 0;color:rgba(215,243,234,0.65);font-size:.92rem}
+
+    /* Decorative image container (now uses external image) */
+    .hero-image{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:12px;border-radius:10px;border:1px solid rgba(19,65,50,0.12);
+      display:flex;align-items:center;justify-content:center;flex-direction:column;
+    }
+    .hero-image img{
+      width:100%;
+      max-width:320px;
+      height:auto;
+      display:block;
+      border-radius:8px;
+      box-shadow: 0 10px 30px rgba(2,10,8,0.45);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* Grid of cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap:18px;
+      margin: 18px 0 28px;
+    }
+
+    /* Card */
+    .card{
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(19,65,50,0.12);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+    }
+    .card:hover,
+    .card:focus-within{ transform: translateY(-10px); box-shadow: 0 30px 60px rgba(2,10,8,0.7); }
+
+    /* Card head */
+    .card-head{display:flex;gap:12px;align-items:center}
+    .icon{
+      width:56px;height:56px;border-radius:10px;
+      background: linear-gradient(135deg, rgba(19,65,50,0.22), rgba(39,176,124,0.06));
+      display:flex;align-items:center;justify-content:center;
+      color:var(--accent);font-weight:700;font-size:1.05rem;
+      box-shadow: inset 0 -4px 10px rgba(0,0,0,0.18);
+      flex-shrink:0;
+    }
+
+    /* Titles */
+    .card h3{margin:0;color:var(--jade-400)}
+    .muted{margin:0;color:rgba(215,243,234,0.8);font-size:.95rem}
+
+    /* Body */
+    .card-body{color:rgba(215,243,234,0.95);font-size:.95rem}
+    .card-body strong{color:var(--jade-400)}
+
+    /* Details */
+    .card-details{margin-top:6px;border-top:1px dashed rgba(255,255,255,0.03);padding-top:10px}
+    .card-details summary{
+      cursor:pointer;
+      list-style:none;
+      color:var(--jade-400);
+      font-weight:600;
+      background:transparent;border:none;padding:0;
+    }
+    .card-details p{margin:.4rem 0 0;color:rgba(215,243,234,0.85);line-height:1.4}
+
+    /* Learn more / Group members */
+    .learn-more{
+      padding: 16px 0 44px;
+      border-top: 1px dashed rgba(255,255,255,0.03);
+    }
+    .learn-more a{ color:var(--jade-400); text-decoration:underline }
+    .group-list{
+      margin: 12px 0 0;
+      padding-left: 1.15rem;
+      color: rgba(215,243,234,0.95);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .site-footer{
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,0.03);
+      color:rgba(215,243,234,0.85);
+      font-size:.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-image{order:-1}
+    }
+    @media (max-width:640px){
+      .icon{width:48px;height:48px;font-size:.95rem}
+      .hero-image img{max-height:220px;object-fit:cover}
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important;animation:none!important}
+    }
+
+    /* Small accessibility helper for keyboard users: focus style for card summary toggle */
+    details summary:focus-visible,
+    .card:focus-within details summary:focus-visible{
+      outline: 3px solid rgba(0,168,107,0.14);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Make whole card clickable to toggle its details (JS-enhanced fallback if JS enabled) */
+    .card[data-has-details] { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="site-title">Types of Network</h1>
+      <p class="site-tagline">PAN · LAN · MAN · WAN — quick descriptions and practical purposes</p>
+    </div>
+  </header>
+
+  <main class="container" id="main" role="main">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <h2>At a glance</h2>
+          <p class="lead">Networks are categorized by scope, scale, and purpose. Below are four common types — Personal, Local, Metropolitan, and Wide area networks — with simple descriptions and real-world purpose statements.</p>
+          <p class="note">This page uses an external reference image displayed to the right.</p>
+        </div>
+
+        <!-- Replaced the embedded SVG with the uploaded image asset -->
+        <figure class="hero-image" role="img" aria-label="Types of Computer Networks: PAN, LAN, MAN, WAN">
+          <img src="images/network.jpg" alt="Diagram: Types of Computer Networks — PAN, LAN, MAN, WAN" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Types of network">
+      <!-- PAN -->
+      <article class="card" aria-labelledby="pan-title" data-has-details>
+        <div class="card-head">
+          <div class="icon" aria-hidden="true">1</div>
+          <div>
+            <h3 id="pan-title">Personal Area Network (PAN)</h3>
+            <p class="muted">Small-range network for a single user</p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p><strong>What it is:</strong> A PAN connects devices that belong to one person — for example a phone, laptop, smartwatch, and headphones.</p>
+          <p><strong>Typical technologies:</strong> Bluetooth, USB, Zigbee, personal hotspot Wi‑Fi.</p>
+          <p><strong>Purpose:</strong> Enable seamless short-range connectivity for personal devices (file sync, audio, tethering).</p>
+        </div>
+
+        <details class="card-details">
+          <summary>Why it matters</summary>
+          <p>PANs simplify daily workflows by letting your personal devices communicate wirelessly. They are usually limited to a few meters and managed by the device owner.</p>
+        </details>
+      </article>
+
+      <!-- LAN -->
+      <article class="card" aria-labelledby="lan-title" data-has-details>
+        <div class="card-head">
+          <div class="icon" aria-hidden="true">2</div>
+          <div>
+            <h3 id="lan-title">Local Area Network (LAN)</h3>
+            <p class="muted">Network within a building or campus</p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p><strong>What it is:</strong> A LAN links computers, printers and servers inside a home, office, or school.</p>
+          <p><strong>Typical technologies:</strong> Ethernet (wired), Wi‑Fi (wireless).</p>
+          <p><strong>Purpose:</strong> High-speed resource sharing, central storage, local services and printing.</p>
+        </div>
+
+        <details class="card-details">
+          <summary>Why it matters</summary>
+          <p>LANs provide fast, low-latency connectivity across short distances and are the backbone of most internal networks in homes and organizations.</p>
+        </details>
+      </article>
+
+      <!-- MAN -->
+      <article class="card" aria-labelledby="man-title" data-has-details>
+        <div class="card-head">
+          <div class="icon" aria-hidden="true">3</div>
+          <div>
+            <h3 id="man-title">Metropolitan Area Network (MAN)</h3>
+            <p class="muted">Network covering a city or large campus</p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p><strong>What it is:</strong> A MAN connects multiple LANs across a metropolitan area — e.g., municipal networks, university campuses, or city-wide ISP segments.</p>
+          <p><strong>Typical technologies:</strong> Fiber rings, leased lines, carrier Ethernet.</p>
+          <p><strong>Purpose:</strong> Aggregate local networks for regional services and efficient inter-LAN communication.</p>
+        </div>
+
+        <details class="card-details">
+          <summary>Why it matters</summary>
+          <p>MANs bridge the gap between local and wide networks, enabling city-scale connectivity and often supporting high-capacity links for businesses and service providers.</p>
+        </details>
+      </article>
+
+      <!-- WAN -->
+      <article class="card" aria-labelledby="wan-title" data-has-details>
+        <div class="card-head">
+          <div class="icon" aria-hidden="true">4</div>
+          <div>
+            <h3 id="wan-title">Wide Area Network (WAN)</h3>
+            <p class="muted">Network spanning countries or the globe</p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p><strong>What it is:</strong> A WAN connects LANs and MANs across long distances and may span cities, countries, or continents.</p>
+          <p><strong>Typical technologies:</strong> MPLS, SD‑WAN, carrier backbones, undersea fiber links.</p>
+          <p><strong>Purpose:</strong> Support long-distance communication between branch offices, cloud datacenters, and global services (the Internet is the largest WAN).</p>
+        </div>
+
+        <details class="card-details">
+          <summary>Why it matters</summary>
+          <p>WANs enable enterprises and users to communicate across geopolitical distances and form the infrastructure that powers global applications and internet access.</p>
+        </details>
+      </article>
+    </section>
+
+    <section class="learn-more" aria-labelledby="group-members">
+      <h2 id="group-members">Group Members</h2>
+      <ul class="group-list" aria-label="List of group members">
+        <li>Ruby Ann P. Nepomuceno</li>
+        <li>Alyssa F. Gaupo</li>
+        <li>Jennifer Lucban</li>
+        <li>Mary Noella Esparagoza</li>
+        <li>Nathalie Rayne Abrico</li>
+        <li>Jessie Ivy Lee Gregorio</li>
+        <li>Emmanuel Gabriel Magdatu</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+    </div>
+  </footer>
+
+  <script>
+    // Small enhancement: make clicking a card toggle its <details> for better UX.
+    // Works only when the card contains a <details> element (we mark cards with data-has-details).
+    (function(){
+      document.querySelectorAll('.card[data-has-details]').forEach(card => {
+        const details = card.querySelector('details');
+        if (!details) return;
+        // If user clicks anywhere on the card except directly on a link or the summary, toggle details
+        card.addEventListener('click', (e) => {
+          const tag = e.target.tagName.toLowerCase();
+          if (tag === 'a' || tag === 'summary' || e.target.closest('a')) return;
+          details.open = !details.open;
+        });
+        // Allow keyboard users to toggle with Enter/Space when focus is on the card
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            details.open = !details.open;
+          }
+        });
+        // Make card focusable for keyboard users
+        card.tabIndex = 0;
+      });
+    })();
+  </script>
+</body>
+</html>
